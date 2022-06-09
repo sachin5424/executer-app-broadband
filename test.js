@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { createDrawerNavigator }
-		from '@react-navigation/drawer';
-import { NavigationContainer }
-		from '@react-navigation/native';
-import HomeScreen from './pages/HomeScreen'
-
-
-  import MyComponent from './pages/Drawer/Drawer';
-  import ProfileScreen from './pages/profile/index';
-  import AboutUsScreen from './pages/aboutUsScreen';
-  import TermsAndServiceScreen from './pages/Terms-and-service'
+import {Text, View} from 'react-native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import HomeScreen from './src/pages/HomeScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ProfileScreen from './src/pages/profile/index';
+import AboutUsScreen from './src/pages/aboutUsScreen';
+import CustomDrawer from './src/pages/Drawer/Drawer';
+import TermsAndServiceScreen from './src/pages/Terms-and-service';
+import {COLORS} from './src/constant';
 
 // function HomeScreen() {
 // return (
@@ -22,46 +23,99 @@ import HomeScreen from './pages/HomeScreen'
 // }
 
 function NotificationsScreen() {
-return (
-	<View style={{ flex: 1, alignItems: 'center',
-				justifyContent: 'center' }}>
-	<Text>Notifications Page</Text>
-	</View>
-);
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Notifications Page</Text>
+    </View>
+  );
 }
 
 function AboutScreen() {
-    
-return (
-	<View style={{ flex: 1, alignItems: 'center',
-				justifyContent: 'center' }}>
-	<Text>About Page</Text>
-	</View>
-);
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>About Page</Text>
+    </View>
+  );
 }
 const Drawer = createDrawerNavigator();
 
-
-
-export default function App({setToken}) {
-
-return (
-	<NavigationContainer   >
-	<Drawer.Navigator drawerContent={props=><MyComponent {...props}/>}  initialRouteName="Home"  screenOptions={{
-        headerShown: false
+export default function AppContainer({setToken}) {
+  return (
+    // <NavigationContainer>
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        headerStyle: {
+          backgroundColor: COLORS.white,
+        },
+        drawerActiveBackgroundColor: COLORS.purple,
+        drawerActiveTintColor: COLORS.white,
+        drawerInactiveTintColor: COLORS.white,
       }}>
-		<Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Profile" component={ProfileScreen} />
-		<Drawer.Screen name="Terms & condition"
-					component={TermsAndServiceScreen} />
-		<Drawer.Screen  name="Privacy policy" component={AboutScreen} />
-        {/* <Drawer.Screen screenOptions={{headerShown:true}} name="Share App" component={AboutScreen} /> */}
-        <Drawer.Screen name="About App" component={AboutUsScreen} />
-        <Drawer.Screen name="Logout"  component={AboutScreen} />
-	</Drawer.Navigator>
-	</NavigationContainer>
-);
+      <Drawer.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'Home',
+          drawerIcon: ({color, focused}) => (
+            <Entypo name="home" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+          drawerIcon: ({color, focused}) => (
+            <FontAwesome name="user" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Terms & condition"
+        component={TermsAndServiceScreen}
+        options={{
+          title: 'Terms & condition',
+          drawerIcon: ({color, focused}) => (
+            <Entypo name="lock" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Privacy policy"
+        component={AboutScreen}
+        options={{
+          title: 'Privacy policy',
+          drawerIcon: ({color, focused}) => (
+            <MaterialIcons name="privacy-tip" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+      {/* <Drawer.Screen screenOptions={{headerShown:true}} name="Share App" component={AboutScreen} /> */}
+      <Drawer.Screen
+        name="About App"
+        component={AboutUsScreen}
+        options={{
+          title: 'About App',
+          drawerIcon: ({color, focused}) => (
+            <Ionicons name="information-circle" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+      {/* <Drawer.Screen
+        name="Logout"
+        component={AboutScreen}
+        options={{
+          title: 'Logout',
+          drawerIcon: ({color, focused}) => (
+            <Ionicons name="ios-exit" size={22} color={COLORS.pink} />
+          ),
+        }}
+      /> */}
+    </Drawer.Navigator>
+    // </NavigationContainer>
+  );
 }
-
-
-

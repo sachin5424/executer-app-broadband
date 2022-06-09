@@ -46,9 +46,9 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-broadband1.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-broadband1.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = broadband1/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-broadband1-broadband1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-broadband1-broadband1Tests.release.xcconfig"; path = "Target Support Files/Pods-broadband1-broadband1Tests/Pods-broadband1-broadband1Tests.release.xcconfig"; sourceTree = "<group>"; };
-		913BA5103C8C4151A45AA562 /* OleoScript-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OleoScript-Bold.ttf"; path = "../assets/fonts/OleoScript-Bold.ttf"; sourceTree = "<group>"; };
-		9FBC4C0ABE8B46408F115E98 /* PinyonScript-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PinyonScript-Regular.ttf"; path = "../assets/fonts/PinyonScript-Regular.ttf"; sourceTree = "<group>"; };
-		DF6238DC070D4166B3A6DC49 /* OleoScript-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OleoScript-Regular.ttf"; path = "../assets/fonts/OleoScript-Regular.ttf"; sourceTree = "<group>"; };
+		913BA5103C8C4151A45AA562 /* OleoScript-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OleoScript-Bold.ttf"; path = "../assets/fonts/OleoScript-Bold.ttf"; sourceTree = "<group>"; };
+		9FBC4C0ABE8B46408F115E98 /* PinyonScript-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PinyonScript-Regular.ttf"; path = "../assets/fonts/PinyonScript-Regular.ttf"; sourceTree = "<group>"; };
+		DF6238DC070D4166B3A6DC49 /* OleoScript-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OleoScript-Regular.ttf"; path = "../assets/fonts/OleoScript-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -120,7 +120,6 @@
 				9FBC4C0ABE8B46408F115E98 /* PinyonScript-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -516,7 +515,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.broadband1;
 				PRODUCT_NAME = broadband1;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -541,7 +540,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.broadband1;
 				PRODUCT_NAME = broadband1;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
