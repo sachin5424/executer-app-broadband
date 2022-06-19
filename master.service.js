@@ -13,6 +13,7 @@ const api_url = {
   acceptedComplaint: 'private/executiv/accpit/list',
   solvedComplaint: 'private/executive/compliant/solve-list',
   acceptComplaint: 'private/executive/compliant/accepted',
+  arriveComplaint: 'private/executive/compliant/arrive',
   solveComplaint: 'private/executive/compliant/solve',
 };
 

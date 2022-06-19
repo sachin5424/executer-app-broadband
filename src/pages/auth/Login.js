@@ -111,6 +111,8 @@ const Login = ({navigation}) => {
                   placeHolderColor={COLORS.white}
                   containerStyles={Styles.feildStyle}
                   imageUrl={Images.phoneIcon}
+                  keyboardType="numeric"
+                  maxLength={10}
                   imageStyling={{width: 20, aspectRatio: 1, tintColor: 'blue'}}
                 />
 

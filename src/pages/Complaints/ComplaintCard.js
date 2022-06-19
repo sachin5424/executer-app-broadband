@@ -2,34 +2,34 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import moment from 'moment';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
-import {FONT_BACK_LABEL, width} from '../../constant/COLORS';
+import {FONT_BACK_LABEL, height, width} from '../../constant/COLORS';
 import {COLORS, Images} from '../../constant';
 import Context from '../../Context/Context';
 
-const ComplaintCard = ({data, type}) => {
+const ComplaintCard = ({data, type, navigation}) => {
   const [time, setTime] = useState('');
   const [address, setAddress] = useState('');
-  const {AcceptComplaint, SolveComplaint} = Context();
+  const {AcceptComplaint, ArriveComplaint, SolveComplaint} = Context();
 
   useEffect(() => {
     let dataTime = moment(data?.compliantCreateTime)
       .add(data?.compliantResolveTimeSec || 0, 'seconds')
       .format('llll');
     setTime(dataTime);
-    let profileName = data?.user?.address;
-    const address =
-      profileName?.houseNo +
-      ',' +
-      profileName?.state +
-      ', ' +
-      profileName?.city +
-      ', ' +
-      profileName?.landmark +
-      ', ' +
-      profileName?.locality +
-      ', ' +
-      profileName?.pincode;
-    setAddress(address);
+    // let profileName = data?.user?.address;
+    // const address =
+    //   profileName?.houseNo +
+    //   ',' +
+    //   profileName?.state +
+    //   ', ' +
+    //   profileName?.city +
+    //   ', ' +
+    //   profileName?.landmark +
+    //   ', ' +
+    //   profileName?.locality +
+    //   ', ' +
+    //   profileName?.pincode;
+    // setAddress(address);
     // return () => {
     // }
   }, []);
@@ -68,7 +68,7 @@ const ComplaintCard = ({data, type}) => {
             </Text>
             <Text
               style={{
-                fontSize: FONT_BACK_LABEL - 2,
+                fontSize: width * 0.04,
                 fontWeight: 'bold',
                 color: COLORS.white,
                 backgroundColor: COLORS.lightPurple,
@@ -81,7 +81,7 @@ const ComplaintCard = ({data, type}) => {
               {data?.type}
             </Text>
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', marginTop: -(height * 0.09)}}>
             <Image
               source={require('../../../assets/Group83242x.png')}
               style={{width: 100, height: 100}}
@@ -95,20 +95,28 @@ const ComplaintCard = ({data, type}) => {
               }}>
               {data?.user?.username || 'Username'}
             </Text>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: COLORS.white,
+                fontSize: 18,
+              }}>
+              {data?.user?.phone || 'Phone'}
+            </Text>
           </View>
         </View>
       </Card.Content>
-      <Card.Content style={{margin: 0, marginTop: -25}}>
+      {/* <Card.Content style={{margin: 0, marginTop: -25}}>
         <Text
           style={{
             fontSize: FONT_BACK_LABEL,
             fontWeight: 'bold',
             color: COLORS.white,
           }}>
-          Complaint Location
+          User Number
         </Text>
-      </Card.Content>
-      <Card.Content
+      </Card.Content> */}
+      {/* <Card.Content
         style={{
           margin: 5,
           backgroundColor: COLORS.lightPurple,
@@ -121,15 +129,14 @@ const ComplaintCard = ({data, type}) => {
             fontWeight: 'bold',
             color: 'white',
           }}>
-          {' '}
-          {address}
+          {data?.user?.phone || 'Phone'}
         </Title>
-      </Card.Content>
+      </Card.Content> */}
       <Card.Actions
         style={{
-          marginBottom: 20,
+          marginVertical: 20,
           alignItems: 'center',
-          justifyContent: 'flex-end',
+          justifyContent: 'center',
         }}>
         {type == 'new' ? (
           <Button
@@ -139,7 +146,7 @@ const ComplaintCard = ({data, type}) => {
             color={COLORS.white}
             style={{
               backgroundColor: COLORS.creamPink,
-              width: 150,
+              width: width*0.36,
               marginHorizontal: 10,
               borderRadius: 30,
             }}>
@@ -149,19 +156,37 @@ const ComplaintCard = ({data, type}) => {
           <></>
         )}
         {type == 'accept' ? (
-          <Button
-            onPress={() => {
-              SolveComplaint(data?._id);
-            }}
-            color={COLORS.white}
-            style={{
-              backgroundColor: COLORS.creamPink,
-              width: 150,
-              marginHorizontal: 10,
-              borderRadius: 30,
-            }}>
-            Solve
-          </Button>
+          <>
+            <Button
+              onPress={() => {
+                data?.compliantStatus == "00" ? ArriveComplaint(data?._id) : console.log("done");
+                // SolveComplaint();
+                
+              }}
+              color={COLORS.white}
+              style={{
+                backgroundColor: data?.compliantStatus !== "00" ? COLORS.lime :COLORS.creamPink,
+                width: width*0.36,
+                marginHorizontal: 10,
+                borderRadius: 30,
+              }}>
+              Arrive
+            </Button>
+            <Button
+              onPress={() => {
+                // SolveComplaint();
+                navigation.navigate('ComplainPin', {id: data?._id});
+              }}
+              color={COLORS.white}
+              style={{
+                backgroundColor: COLORS.creamPink,
+                width: width*0.36,
+                marginHorizontal: 10,
+                borderRadius: 30,
+              }}>
+              Solve
+            </Button>
+          </>
         ) : (
           <></>
         )}

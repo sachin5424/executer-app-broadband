@@ -14,6 +14,7 @@ import Login from '../pages/auth/Login';
 import { Images } from '../constant';
 import AppContainer from '../../test';
 import Context from '../Context/Context';
+import ComplainPin from '../pages/ComplainPin';
 
 
 const Splash = () => {
@@ -146,6 +147,11 @@ const Splash = () => {
           <Stack.Screen
             name="AppContainer"
             component={AppContainer}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ComplainPin"
+            component={ComplainPin}
             options={{headerShown: false}}
           />
           {/* <Stack.Screen

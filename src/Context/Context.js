@@ -5,8 +5,14 @@ import {
   getError,
   _httpGetResponse,
   _httpPostRequest,
+  _httpPutRequest,
 } from '../../master.service';
-import { ACCEPTCOMPLAINTS, GET_PROFILE, NEWCOMPLAINTS, SOLVECOMPLAINTS } from '../redux/UserSlice';
+import {
+  ACCEPTCOMPLAINTS,
+  GET_PROFILE,
+  NEWCOMPLAINTS,
+  SOLVECOMPLAINTS,
+} from '../redux/UserSlice';
 
 export const AdminContext = createContext();
 
@@ -36,7 +42,7 @@ export const ContextState = ({children}) => {
   const GetNewComplaintApi = () => {
     _httpGetResponse(api_url.newComplaint, '')
       .then(res => {
-        // console.log('Enter Get GetNewComplaintApi',res.data);
+        console.log('Enter Get GetNewComplaintApi',res.data?.length);
         // dispatch(GET_PROFILE({...res?.data?.userId}));
         dispatch(NEWCOMPLAINTS(res.data));
         // getBannerApi();
@@ -50,7 +56,7 @@ export const ContextState = ({children}) => {
   const GetAcceptComplaintApi = () => {
     _httpGetResponse(api_url.acceptedComplaint, '')
       .then(res => {
-        // console.log('Enter Get GetAcceptComplaintApi');
+        console.log('Enter Get GetAcceptComplaintApi',res.data?.length);
         // dispatch(GET_PROFILE({...res?.data?.userId}));
         dispatch(ACCEPTCOMPLAINTS(res.data?.reverse()));
         // getBannerApi();
@@ -74,13 +80,13 @@ export const ContextState = ({children}) => {
       });
   };
 
-  const AcceptComplaint = (id) => {
-    console.log({id},"gfchvbj");
+  const AcceptComplaint = id => {
+    console.log({id}, 'gfchvbj');
     _httpGetResponse(api_url.acceptComplaint, id)
       .then(res => {
-        console.log('Enter Get AcceptComplaint',res);
-        GetNewComplaintApi()
-        GetAcceptComplaintApi()
+        console.log('Enter Get AcceptComplaint', res);
+        GetNewComplaintApi();
+        GetAcceptComplaintApi();
         // dispatch(GET_PROFILE({...res?.data?.userId}));
         // getBannerApi();
       })
@@ -89,14 +95,12 @@ export const ContextState = ({children}) => {
         getError(err, 'Get GetNewComplaintApi');
       });
   };
-  const SolveComplaint = (id) => {
-    console.log({id},"gfchvbj");
-    _httpGetResponse(api_url.solveComplaint, id)
+  const ArriveComplaint = id => {
+    console.log({id}, 'gfchvbj');
+    _httpPutRequest(api_url.arriveComplaint, id)
       .then(res => {
-        console.log('Enter Get SolveComplaint',res);
-        // GetNewComplaintApi()
-        GetAcceptComplaintApi()
-        GetSolveComplaintApi()
+        console.log('Enter Get ArriveComplaint', res);
+        GetAcceptComplaintApi();
         // dispatch(GET_PROFILE({...res?.data?.userId}));
         // getBannerApi();
       })
@@ -104,6 +108,34 @@ export const ContextState = ({children}) => {
         console.log({err});
         getError(err, 'Get GetNewComplaintApi');
       });
+  };
+  const SolveComplaint = (id, arr, cb, ecb) => {
+    let data = {otp: arr?.join('')};
+    // console.log({otp,arr});
+    // console.log({id},"gfchvbj");
+    _httpPostRequest(`${api_url.solveComplaint}/${id}`, data)
+      .then(res => {
+        console.log('Enter Get SolveComplaint', res);
+        // GetNewComplaintApi()
+        GetAcceptComplaintApi();
+        GetSolveComplaintApi();
+        if (cb) cb();
+        // dispatch(GET_PROFILE({...res?.data?.userId}));
+        // getBannerApi();
+      })
+      .catch(err => {
+        if (ecb) ecb();
+        console.log({err});
+        getError(err, 'Get GetNewComplaintApi');
+      });
+  };
+
+  const Loder = cb => {
+    console.log('loading');
+    GetSolveComplaintApi();
+    GetNewComplaintApi();
+    GetAcceptComplaintApi();
+    if (cb) cb();
   };
 
   return (
@@ -114,7 +146,9 @@ export const ContextState = ({children}) => {
         GetAcceptComplaintApi,
         GetSolveComplaintApi,
         SolveComplaint,
+        ArriveComplaint,
         AcceptComplaint,
+        Loder,
       }}>
       {children}
     </AdminContext.Provider>

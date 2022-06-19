@@ -8,10 +8,11 @@ import {
   selectNewComplainData,
 } from '../../redux/UserSlice';
 import ComplaintCard from './ComplaintCard';
+import Context from '../../Context/Context';
 
-const AcceptComplainScreen = () => {
+const AcceptComplainScreen = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const {Loder}  = Context()
   const acceptcomplaintsData = useSelector(selectAcceptComplainData);
 
   console.log({acceptcomplaintsData: acceptcomplaintsData?.length});
@@ -28,15 +29,18 @@ const AcceptComplainScreen = () => {
         <RefreshControl
           refreshing={isLoading}
           onRefresh={() => {
+            Loder(()=>{
+              setIsLoading(false)
+            });
             // RNRestart.Restart();
-            setIsLoading(!isLoading);
+            // setIsLoading(!isLoading);
           }}
         />
       }>
       {/* <View style={{flex: 1, backgroundColor: 'blue'}}> */}
       {acceptcomplaintsData?.map((x, n) => {
         // console.log('enter', n);
-        return <ComplaintCard key={n} data={x} type={"accept"}/>;
+        return <ComplaintCard key={n} data={x} type={"accept"} navigation={navigation}/>;
       })}
 
       {/* <ComplaintScreen/> */}
