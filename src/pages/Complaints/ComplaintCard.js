@@ -13,8 +13,17 @@ const ComplaintCard = ({data, type, navigation}) => {
 
   useEffect(() => {
     let dataTime = moment(data?.compliantCreateTime)
-      .add(data?.compliantResolveTimeSec || 0, 'seconds')
+    .add(data?.compliantResolveTimeSec || 0, 'seconds')
+    .format('llll');
+    if(data?.executiveCompliantResolveTime) {
+      dataTime = moment(data?.executiveCompliantResolveTime)
       .format('llll');
+    }
+    else if(data?.executiveCompliantAccpetTime) {
+      dataTime = moment(data?.executiveCompliantAccpetTime)
+      .format('llll');
+    }
+    
     setTime(dataTime);
     // let profileName = data?.user?.address;
     // const address =

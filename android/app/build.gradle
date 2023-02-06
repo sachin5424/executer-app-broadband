@@ -231,6 +231,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('broadband1.keystore')
+            storePassword 'Arr@123456'
+            keyAlias 'BroadBandSolution'
+            keyPassword 'Arr@123456'
+        }
     }
     buildTypes {
         debug {
