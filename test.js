@@ -10,8 +10,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ProfileScreen from './src/pages/profile/index';
 import AboutUsScreen from './src/pages/aboutUsScreen';
 import CustomDrawer from './src/pages/Drawer/Drawer';
-import TermsAndServiceScreen from './src/pages/Terms-and-service';
 import {COLORS} from './src/constant';
+import PrivacyPolicy from './src/pages/PrivacyPolicy';
+import ContactUs from './src/pages/ContactUs';
 
 // function HomeScreen() {
 // return (
@@ -74,26 +75,6 @@ export default function AppContainer({setToken}) {
           ),
         }}
       />
-      <Drawer.Screen
-        name="Terms & condition"
-        component={TermsAndServiceScreen}
-        options={{
-          title: 'Terms & condition',
-          drawerIcon: ({color, focused}) => (
-            <Entypo name="lock" size={22} color={COLORS.pink} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Privacy policy"
-        component={AboutScreen}
-        options={{
-          title: 'Privacy policy',
-          drawerIcon: ({color, focused}) => (
-            <MaterialIcons name="privacy-tip" size={22} color={COLORS.pink} />
-          ),
-        }}
-      />
       {/* <Drawer.Screen screenOptions={{headerShown:true}} name="Share App" component={AboutScreen} /> */}
       <Drawer.Screen
         name="About App"
@@ -102,6 +83,26 @@ export default function AppContainer({setToken}) {
           title: 'About App',
           drawerIcon: ({color, focused}) => (
             <Ionicons name="information-circle" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+       <Drawer.Screen
+        name="Privacy policy"
+        component={PrivacyPolicy}
+        options={{
+          title: 'Privacy policy',
+          drawerIcon: ({color, focused}) => (
+            <MaterialIcons name="privacy-tip" size={22} color={COLORS.pink} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="ContactUs"
+        component={ContactUs}
+        options={{
+          title: 'ContactUs',
+          drawerIcon: ({color, focused}) => (
+            <Entypo name="lock" size={22} color={COLORS.pink} />
           ),
         }}
       />
