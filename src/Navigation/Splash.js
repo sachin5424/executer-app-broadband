@@ -37,7 +37,7 @@ const Splash = () => {
         setLoading(false);
       });
     } else {
-      
+      ProfileApi()
       setLoading(false);
     }
     // setTimeout(, 2000);
